@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #f3f3f3;
+    }
+
+    h2 {
+      font-size: 32px;
+      color: #333;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 40px;
+      font-size: 24px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Rock, Paper, Scissors Game</h2>
+
+  <button onclick="play('rock')">Rock</button>
+  <button onclick="play('paper')">Paper</button>
+  <button onclick="play('scissors')">Scissors</button>
+
+  <div id="result"></div>
+
+  <script>
+    function play(choice) {
+      fetch(`http://localhost:8080/api/play?userChoice=${choice}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            document.getElementById("result").innerText = data.error;
+          } else {
+            document.getElementById("result").innerText =
+              `🧍 You chose: ${data.userChoice}\n🤖 Computer chose: ${data.computerChoice}\n➡️ ${data.result}`;
+          }
+        })
+        .catch(error => {
+          document.getElementById("result").innerText = "⚠️ Server error or not running";
+        });
+    }
+  </script>
+
+</body>
+</html>
