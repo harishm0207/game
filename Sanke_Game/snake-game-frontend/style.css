@@ -1,0 +1,12 @@
+body {
+    text-align: center;
+    background: #1e1e1e;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  canvas {
+    background: #333;
+    border: 2px solid #fff;
+  }
+  
